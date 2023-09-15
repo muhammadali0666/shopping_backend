@@ -18,8 +18,6 @@ sequelize
       .then(() => console.log('Connected'))
       .catch((err) => console.log(err))  
 
-
-
 module.exports = {
     sequelize,
     DataTypes
