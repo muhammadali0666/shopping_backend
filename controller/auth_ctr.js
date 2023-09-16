@@ -1,40 +1,39 @@
-const { Users } = require("../model")
-const bcrypt = require("bcryptjs")
-const jwt = require("jsonwebtoken")
+const { Users } = require("../model");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
-Users.sync({ force: false })
+Users.sync({ force: false });
 
 const authRegister = async (req, res) => {
- try{
-    const { username, email, password } = req.body
+  try {
+    const { username, email, password, phoneNumber } = req.body;
 
-    const user = await Users.findOne({ where: { email: email } })
+    const user = await Users.findOne({ where: { email: email } });
     if (user) {
-        return res.status(200).send({
-            msg: "user already exists"
-        })
+      return res.status(200).send({
+        msg: "user already exists",
+      });
     }
+
     if (!password.trim().match(/[A-Za-z0-9]+$/g)) {
-        return res.status(400).send({
-            msg: "Password invalid"
-        })
+      return res.status(400).send({
+        msg: "Password invalid",
+      });
     }
 
-    let hash = await bcrypt.hash(password, 12)
+    let hash = await bcrypt.hash(password, 12);
 
-    await Users.create({ username, email, password: hash })
+    await Users.create({ username, email, password: hash, phoneNumber });
 
     return res.status(201).send({
-        msg: "Registered!"
-    })
- }
- catch(err) {
+      msg: "Registered!",
+    });
+  } catch (err) {
     return res.send({
-        msg: err.message
-    })
- }
-
-}
+      msg: err.message,
+    });
+  }
+};
 
 const authLogin = async (req, res) => {
   try {

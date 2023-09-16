@@ -21,6 +21,9 @@ const Users = sequelize.define("auth", {
     type: DataTypes.TEXT,
     defaultValue: 'user'
   },
+  phoneNumber:{ 
+   type: DataTypes.INTEGER
+  }
 })
 
 module.exports = Users;
