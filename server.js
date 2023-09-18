@@ -8,6 +8,7 @@ const monitorRouter = require("./router/monitor_router")
 const computerRouter = require("./router/comuter_router")
 const pultRouter = require("./router/pult_router")
 const tabletRouter = require("./router/tablet_router")
+const printerRouter = require("./router/printer_router")
 
 const app = express();
 
@@ -25,6 +26,7 @@ app.use(monitorRouter)
 app.use(computerRouter)
 app.use(pultRouter)
 app.use(tabletRouter)
+app.use(printerRouter)
 
 app.listen(PORT, () => {
   console.log(`Server is running on ${PORT} the Port`);
