@@ -4,6 +4,7 @@ const ComputerComponents = require("./computerComponents_model")
 const Monitor = require("./mointor_model")
 const Computer = require("./computer_model")
 const Pult = require("./pult_model")
+const Tablet = require("./tablet_model")
 
 module.exports = {
     Users,
@@ -11,5 +12,6 @@ module.exports = {
     ComputerComponents,
     Monitor,
     Computer,
-    Pult
+    Pult,
+    Tablet
 }
