@@ -4,7 +4,7 @@ ComputerComponents.sync({ force: false });
 
 const createComponent = async (req, res) => {
   try {
-    const { title, comments, price, brand, category } = req.body;
+    const { title, comments, price, brand, category, picture } = req.body;
 
     await ComputerComponents.create({
       title,
@@ -12,6 +12,7 @@ const createComponent = async (req, res) => {
       price,
       brand,
       category,
+      picture
     });
 
     return res.status(200).send({

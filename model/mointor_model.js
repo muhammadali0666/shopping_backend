@@ -1,7 +1,7 @@
 const { sequelize, DataTypes } = require("../db/db_config");
 const { UUIDV4 } = require("sequelize");
 
-const NoutbookProduct = sequelize.define("noutbook", {
+const Monitor = sequelize.define("monitor", {
   id: {
     type: DataTypes.TEXT,
     defaultValue: UUIDV4,
@@ -23,27 +23,12 @@ const NoutbookProduct = sequelize.define("noutbook", {
   category: {
     type: DataTypes.TEXT,
   },
-  picture: {
-    type: DataTypes.TEXT
-  },
   ekranDiaganali: {
     type: DataTypes.TEXT,
   },
   ekranOlchami: {
     type: DataTypes.TEXT,
   },
-  protsessor: {
-    type: DataTypes.TEXT,
-  },
-  protsessorChastotasi: {
-    type: DataTypes.TEXT,
-  },
-  ram: {
-    type: DataTypes.TEXT,
-  },
-  sinfi: {
-    type: DataTypes.TEXT,
-  },
 });
 
-module.exports = NoutbookProduct;
+module.exports = Monitor;

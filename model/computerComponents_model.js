@@ -23,6 +23,9 @@ const ComputerComponents = sequelize.define("computer_component", {
   category: {
     type: DataTypes.TEXT,
   },
+  picture: {
+    type: DataTypes.TEXT
+  }
 });
 
 module.exports = ComputerComponents;
