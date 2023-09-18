@@ -1,8 +1,9 @@
 const { Router } = require("express")
-const {createNoubook} = require('../controller/product_ctr')
+const {createNoubook, getNoutbooks} = require('../controller/product_ctr')
 
 const productRouter = Router()
 
-productRouter.post("/create_product", createNoubook)
+productRouter.post("/create_noutbook", createNoubook)
+productRouter.get('/get_noutbooks', getNoutbooks)
 
 module.exports = productRouter
