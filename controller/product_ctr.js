@@ -1,16 +1,51 @@
-const { Product } = require("../model");
+const { NoutbookProduct } = require("../model");
 
-Product.sync({ force: false });
+NoutbookProduct.sync({ force: false });
 
-const createProduct = async (req, res) => {
+const createNoubook = async (req, res) => {
   try {
-    const {title, comments, price, brand, category } = req.body
+    const {
+      title,
+      comments,
+      price,
+      brand,
+      category,
+      ekranDiaganali,
+      ekranOlchami,
+      protsessor,
+      protsessorChastotasi,
+      ram,
+      sinfi,
+    } = req.body;
 
-    await Product.create({title, comments, price, brand, category})
+    await NoutbookProduct.create({
+      title,
+      comments,
+      price,
+      brand,
+      category,
+      ekranDiaganali,
+      ekranOlchami,
+      protsessor,
+      protsessorChastotasi,
+      ram,
+      sinfi,
+    });
 
     return res.status(200).send({
-      msg: "product added"
-    })
+      msg: "noutbook added",
+    });
+  } catch (error) {
+    return res.status(401).send({
+      msg: error.message,
+    });
+  }
+};
+
+const getNoutbooks = async (req, res) => {
+  try {
+    const nouts = await NoutbookProduct.findAll();
+    return res.json(nouts);
   } catch (error) {
     return res.status(401).send({
       msg: error.message,
@@ -19,5 +54,6 @@ const createProduct = async (req, res) => {
 };
 
 module.exports = {
-  createProduct,
+  createNoubook,
+  getNoutbooks,
 };
