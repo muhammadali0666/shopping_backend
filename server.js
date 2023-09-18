@@ -2,6 +2,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
 const authRegister = require("./router/auth_router");
+const productRouter = require("./router/product_router")
 
 const app = express();
 
@@ -12,8 +13,8 @@ const PORT = process.env.PORT || 4000;
 app.use(express.json());
 
 //////////////////// Router
-
 app.use(authRegister);
+app.use(productRouter)
 
 app.listen(PORT, () => {
   console.log(`Server is running on ${PORT} the Port`);
