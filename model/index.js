@@ -8,6 +8,7 @@ const Tablet = require("./tablet_model")
 const Printer = require("./printer_model")
 const Kalonka = require("./kalonka_model")
 const Router = require("./router_model")
+const Mouse = require("./mouse_model")
 
 module.exports = {
     Users,
@@ -19,5 +20,6 @@ module.exports = {
     Tablet,
     Printer,
     Kalonka,
-    Router
+    Router,
+    Mouse
 }
