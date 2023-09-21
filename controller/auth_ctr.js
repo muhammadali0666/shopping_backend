@@ -53,16 +53,32 @@ const authLogin = async (req, res) => {
 
     if (check) {
       let token = await jwt.sign(
-        { id: user.id, email: user.email, role: user.role },
+        { id: user.id, email: user.email },
         process.env.SEKRET_KEY,
         {
           expiresIn: process.env.TIME,
         }
       );
 
+      let admin = "";
+
+      if (user.role === "admin") {
+        let adminToken = await jwt.sign(
+          { id: user.id, email: user.email, role: user.role },
+          process.env.SEKRET_KEY,
+          {
+            expiresIn: process.env.TIME,
+          }
+        );
+        admin += adminToken;
+      }
+
+      let checkup = admin.length ? admin : "you are not admin";
+
       return res.status(200).send({
         msg: "Success",
         token,
+        checkup,
       });
     } else {
       res.send({
