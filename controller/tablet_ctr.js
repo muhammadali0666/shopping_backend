@@ -16,7 +16,7 @@ const createTablet = async (req, res) => {
       ram,
       sinfi,
       xotira,
-      rang, 
+      rang,
       kamera,
     } = req.body;
 
@@ -32,7 +32,7 @@ const createTablet = async (req, res) => {
       ram,
       sinfi,
       xotira,
-      rang, 
+      rang,
       kamera,
     });
 
@@ -57,7 +57,111 @@ const getTablets = async (req, res) => {
   }
 };
 
+const deleteTablet = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const foundedId = await Tablet.findOne({ where: { id: id } });
+
+    if (!foundedId) {
+      return res.send({
+        msg: "id not found",
+      });
+    }
+
+    if (!id) {
+      return res.send({
+        msg: "id required",
+      });
+    }
+    await Tablet.destroy({
+      returning: true,
+      plain: true,
+      where: {
+        id,
+      },
+    });
+    return res.send({
+      msg: "deleted tablet!",
+    });
+  } catch (error) {
+    return res.send({
+      msg: error.message,
+    });
+  }
+};
+
+const search = async (req, res) => {
+  try {
+    const { search } = req.headers;
+
+    let searchValidation = search.trim();
+
+    let objIsmsharif = await Tablet.findAll({
+      where: { title: searchValidation },
+    });
+    return res.status(201).send(objIsmsharif);
+  } catch (err) {
+    return res.send({ msg: err.message });
+  }
+};
+
+const updateTablet = async (req, res) => {
+  try {
+    const {
+      title,
+      comments,
+      price,
+      brand,
+      category,
+      picture,
+      ekranDiaganali,
+      ekranOlchami,
+      ram,
+      sinfi,
+      xotira,
+      rang,
+      kamera,
+    } = req.body;
+    const { id } = req.params;
+
+    const updatedComponent = await Tablet.update(
+      {
+        title,
+        comments,
+        price,
+        brand,
+        category,
+        picture,
+        ekranDiaganali,
+        ekranOlchami,
+        ram,
+        sinfi,
+        xotira,
+        rang,
+        kamera,
+      },
+      {
+        returning: true,
+        plain: false,
+        where: {
+          id,
+        },
+      }
+    );
+
+    return res.send(updatedComponent.filter((e) => e));
+  } catch (error) {
+    return res.send({
+      msg: error.message,
+    });
+  }
+};
+
 module.exports = {
   createTablet,
   getTablets,
+  search,
+  deleteTablet,
+  updateTablet,
 };
