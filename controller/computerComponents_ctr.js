@@ -40,7 +40,19 @@ const deleteComponent = async (req, res) => {
   try {
     const { id } = req.params;
 
-    //  await ComputerComponents.findOne({ where: { id: id } })
+    const foundedId = await ComputerComponents.findOne({ where: { id: id } });
+
+    if (!foundedId) {
+      return res.send({
+        msg: "id not found",
+      });
+    }
+
+    if (!id) {
+      return res.send({
+        msg: "id required",
+      });
+    }
 
     await ComputerComponents.destroy({
       returning: true,
@@ -49,7 +61,15 @@ const deleteComponent = async (req, res) => {
         id,
       },
     });
-    return res.send("deleted component!");
+    if (!id) {
+      return res.send({
+        msg: "id required",
+      });
+    }
+
+    return res.send({
+      msg: "deleted component!",
+    });
   } catch (error) {
     return res.send({
       msg: error.message,
