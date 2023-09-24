@@ -93,9 +93,7 @@ const search = async (req, res) => {
   try {
     const { search } = req.headers;
 
-    let searchToLowerCase = search.toLowerCase();
-
-    let searchValidation = searchToLowerCase.trim();
+    let searchValidation = search.trim();
 
     let objIsmsharif = await Computer.findAll({
       where: { title: searchValidation },

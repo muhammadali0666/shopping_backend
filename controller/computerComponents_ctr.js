@@ -81,9 +81,7 @@ const search = async (req, res) => {
   try {
     const { search } = req.headers;
 
-    let searchToLowerCase = search.toLowerCase();
-
-    let searchValidation = searchToLowerCase.trim();
+    let searchValidation = search.trim();
 
     let objIsmsharif = await ComputerComponents.findAll({
       where: { title: searchValidation },
@@ -96,11 +94,11 @@ const search = async (req, res) => {
 
 const updateComponent = async (req, res) => {
   try {
-    const { title, price, comments, brand, category } = req.body;
+    const { title, price, comments, brand, category, picture } = req.body;
     const { id } = req.params;
 
     const updatedComponent = await ComputerComponents.update(
-      { title, price, comments, brand, category },
+      { title, price, comments, brand, category, picture },
       {
         returning: true,
         plain: false,
