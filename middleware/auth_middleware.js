@@ -4,15 +4,17 @@ const { userValidation } = require("../validation/auth_validate");
 
 const verifyAdmin = async (req, res, next) => {
   try {
-    const token = req.headers.token
-  
-    if (!token) {
+    const getATN = req.headers.getatn
+
+    
+    if (!getATN) {
       return res.status(403).send("A token is required for authentication");
     }
-    const decoded = jwt.verify(token, process.env.SEKRET_KEY);
+    const decoded = jwt.verify(getATN, process.env.SEKRET_KEY_ADMIN);
     req.email = decoded;
-    const admin = await Users.findOne({ where: { email: email } });
-    req.isAdmin = admin.rows[0].role;
+    // const admin = await Users.findOne({ where: { email: email } });
+    // req.isAdmin = admin.rows[0].role;
+    // console.log(req.isAdmin);
 
   } catch (err) {
     return res.status(401).send("Invalid Token");

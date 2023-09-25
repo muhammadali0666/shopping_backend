@@ -65,7 +65,7 @@ const authLogin = async (req, res) => {
       if (user.role === "admin") {
         let adminToken = await jwt.sign(
           { id: user.id, email: user.email, role: user.role },
-          process.env.SEKRET_KEY,
+          process.env.SEKRET_KEY_ADMIN,
           {
             expiresIn: process.env.TIME,
           }
