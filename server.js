@@ -12,24 +12,14 @@ const printerRouter = require("./router/printer_router");
 const kalonkaRouter = require("./router/kalonka_router");
 const routerRouter = require("./router/router_router");
 const mouseRouter = require("./router/mouse_router");
-const accountSid = process.env.TWILIO_ACCOUNT_SID;
-const authToken = process.env.TWILIO_AUTH_TOKEN;
-const client = require("twilio")(accountSid, authToken);
 
 const app = express();
 
 app.use(cors());
 dotenv.config();
 const PORT = process.env.PORT || 4000;
+app.use(express.json());
 
-// app.use(express.json());
-// client.messages
-//   .create({
-//     body: "Hello from twilio-node",
-//     to: "+998904565025", // Text your number
-//     from: "+998904565025", // From a valid Twilio number
-//   })
-//   .then((message) => console.log(message.sid));
 
 //////////////////// Router
 app.use(authRegister);

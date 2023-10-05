@@ -1,12 +1,4 @@
 const { NoutbookProduct } = require("../model");
-const { ComputerComponents } = require("../model");
-const { Monitor } = require("../model");
-const { Computer } = require("../model");
-const { Pult } = require("../model");
-const { Tablet } = require("../model");
-const { Printer } = require("../model");
-const { Kalonka } = require("../model");
-const { Router } = require("../model");
 
 NoutbookProduct.sync({ force: false });
 
@@ -62,19 +54,6 @@ const getNoutbooks = async (req, res) => {
     });
   }
 };
-const getAllProducts = async (req, res) => {
-  try {
-    const nouts = await NoutbookProduct.findAll();
-    const components = await ComputerComponents.findAll();
-    // console.log(nouts);
-    return res.json(components);
-  } catch (error) {
-    return res.status(401).send({
-      msg: error.message,
-    });
-  }
-};
-
 const deleteNoutbook = async (req, res) => {
   try {
     const { id } = req.params;
@@ -177,7 +156,6 @@ const updateNoutbook = async (req, res) => {
 module.exports = {
   createNoubook,
   getNoutbooks,
-  getAllProducts,
   search, 
   updateNoutbook,
   deleteNoutbook
